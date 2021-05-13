@@ -1,6 +1,6 @@
 # dstrap
 
-`dstrap` is a simple script made to get the most useful information about your current working directory. Made with Crystal for Linux systems, it's the perfect supplement to commands like `ls -la`
+`dstrap` is a simple script made to get the most useful information about your current working directory. Made with Crystal for Linux systems, it's the perfect supplement to commands like `ls -a`.
 
 ### Installation:
 
@@ -9,7 +9,7 @@ To install and build the latest version of dstrap, run the following:
 ```bash
 wget -O dstrap.cr https://raw.githubusercontent.com/frissyn/dstrap.cr/main/dstrap.cr
 crystal build dstrap.cr -o dstrap --release --no-debug --progress
-chmod +x ./dstrap
+rm dstrap.cr && chmod +x ./dstrap
 ```
 
 And that's all! Call the executable with `./dstrap` and enjoy.
@@ -18,4 +18,4 @@ And that's all! Call the executable with `./dstrap` and enjoy.
 ./dstrap
 ```
 
-![image](https://storage.googleapis.com/replit/images/1620853470837_51407f2bc32aec3db52e2a179daa58e9.png)
+![image](https://storage.googleapis.com/replit/images/1620914500866_ce41616884e027118ab8987828e45520.png)

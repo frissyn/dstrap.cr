@@ -10,10 +10,11 @@ print(" #{File.basename(Dir.current)}/\n".colorize.mode(:bold))
 print("\n./".colorize.mode(:bold))
 Dir.children(".").each do |d|
     info = File.info("./#{d}")
-    prefix = File.directory?(d) ? "  📂  " : "  📃  "
+    aft = File.directory?(d) ? "/" : ""
+    pre = File.directory?(d) ? "  📂  " : "  📃  "
 
     print(
-        "\n#{prefix}#{d.colorize.mode(:bold)}".ljust(30),
+        "\n#{pre}#{d.colorize.mode(:bold)}#{aft}".ljust(30),
         info.permissions.to_s.split(' ')[0].colorize(:light_cyan),  
         "  ", "#{info.size} B".colorize(:light_yellow).mode(:underline)
     )
@@ -24,10 +25,11 @@ end
 print("\n../".colorize.mode(:bold))
 Dir.children("..").each do |d|
     info = File.info("../#{d}")
-    prefix = File.directory?(d) ? "  📂  " : "  📃  "
+    aft = File.directory?(d) ? "/" : ""
+    pre = File.directory?(d) ? "  📂  " : "  📃  "
 
     print(
-        "\n#{prefix}#{d.colorize.mode(:bold)}".ljust(30),
+        "\n#{pre}#{d.colorize.mode(:bold)}#{aft}".ljust(30),
         info.permissions.to_s.split(' ')[0].colorize(:light_cyan), 
         "  ", "#{info.size} B".colorize(:light_yellow).mode(:underline)
     )

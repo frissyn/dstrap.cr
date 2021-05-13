@@ -1,45 +1,36 @@
 require "colorize"
 
-# Current Directory
+
+# Display current directory
 print("pwd".colorize(:red).mode(:bold), ':')
 print(" #{File.basename(Dir.current)}/\n".colorize.mode(:bold))
 
 
-# List Directory children
+# List current directory children
 print("\n./".colorize.mode(:bold))
 Dir.children(".").each do |d|
-    unless d.starts_with?(".")
-        if File.directory?(d)
-            print(
-                "\n  #{d.colorize.mode(:bold)}/".ljust(30, ' '),
-                File.info("./#{d}").permissions.to_s.split(' ')[0]
-            )
-        else
-            print(
-                "\n  #{d.colorize.mode(:bold)}".ljust(30, ' '),
-                File.info("./#{d}").permissions.to_s.split(' ')[0]
-            )
-        end
-    end
+    info = File.info("./#{d}")
+    prefix = File.directory?(d) ? "  📂  " : "  📃  "
+
+    print(
+        "\n#{prefix}#{d.colorize.mode(:bold)}".ljust(30),
+        info.permissions.to_s.split(' ')[0].colorize(:light_cyan),  
+        "  ", "#{info.size} B".colorize(:light_yellow).mode(:underline)
+    )
 end
 
 
-# List parent children
+# List parent directory children
 print("\n../".colorize.mode(:bold))
 Dir.children("..").each do |d|
-    unless d.starts_with?(".")
-        if File.directory?(d)
-            print(
-                "\n  #{d.colorize.mode(:bold)}/".ljust(30, ' '),
-                File.info("../#{d}").permissions.to_s.split(' ')[0]
-            )
-        else
-            print(
-                "\n  #{d.colorize.mode(:bold)}".ljust(30, ' '),
-                File.info("../#{d}").permissions.to_s.split(' ')[0]
-            )
-        end
-    end
+    info = File.info("../#{d}")
+    prefix = File.directory?(d) ? "  📂  " : "  📃  "
+
+    print(
+        "\n#{prefix}#{d.colorize.mode(:bold)}".ljust(30),
+        info.permissions.to_s.split(' ')[0].colorize(:light_cyan), 
+        "  ", "#{info.size} B".colorize(:light_yellow).mode(:underline)
+    )
 end
 
 

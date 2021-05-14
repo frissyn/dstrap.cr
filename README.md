@@ -18,4 +18,4 @@ And that's all! Call the executable with `./dstrap` and enjoy.
 ./dstrap
 ```
 
-![image](https://storage.googleapis.com/replit/images/1620914500866_ce41616884e027118ab8987828e45520.png)
+![image](https://storage.googleapis.com/replit/images/1621009367878_bd4e8ba7dbdd96de114354dce93bea2c.png)

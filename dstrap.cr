@@ -1,6 +1,6 @@
 require "colorize"
 
-targets : Array(String) = [".", ".."]
+targets : Array(String) = ARGV.empty? ? [".", ".."] : ARGV
 emojis : Hash(String, String) = {
     "LICENSE" => "⚖️",
     ".*\.(md|rst|txt)" => "📝",
@@ -9,15 +9,13 @@ emojis : Hash(String, String) = {
     "(package.json)|(package-lock.json)|(.*\.lock)$" => "📦"
 }
 
-max_len : Int32 = [
-    Dir.children(targets[0]).max_by { |d| d.size},
-    Dir.children(targets[1]).max_by { |d| d.size}
-].max.size
-puts max_len
+max_len : Int32 = 0
+
+targets.each { |t| Dir.children(t).each { |c| max_len = c.size unless c.size < max_len } }
+
 # Display current directory
 print("pwd".colorize(:red).mode(:bold))
 print(": #{File.basename(Dir.current)}/\n".colorize.mode(:bold))
-
 
 # List contents of each target
 targets.each do |dirname|

@@ -9,6 +9,11 @@ emojis : Hash(String, String) = {
     "(package.json)|(package-lock.json)|(.*\.lock)$" => "📦"
 }
 
+max_len : Int32 = [
+    Dir.children(targets[0]).max_by { |d| d.size},
+    Dir.children(targets[1]).max_by { |d| d.size}
+].max.size
+puts max_len
 # Display current directory
 print("pwd".colorize(:red).mode(:bold))
 print(": #{File.basename(Dir.current)}/\n".colorize.mode(:bold))
@@ -19,6 +24,7 @@ targets.each do |dirname|
     print("\n#{dirname}/".colorize.mode(:bold))
 
     Dir.children("#{dirname}/").each do |f|
+
         file : File = File.new("#{dirname}/#{f}")
         info : File::Info = file.info
 
@@ -30,8 +36,8 @@ targets.each do |dirname|
         end
 
         print(
-            "\n  #{pre}  #{f}#{suf}".ljust(26, ' ').colorize.mode(:bold),
-            info.permissions.to_s.split(' ')[0].colorize(:light_cyan),
+            "\n  #{pre}  #{f}#{suf}".ljust(max_len + 20, ' ').colorize.mode(:bold),
+            "\t", info.permissions.to_s.split(' ')[0].colorize(:light_cyan),
             " ", "#{info.size} B".colorize(:light_yellow).mode(:underline)
         )
     end
